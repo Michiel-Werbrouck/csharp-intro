@@ -46,44 +46,39 @@ namespace FractionExercise
             return new Fraction(this.Denominator, this.Numerator);
         }
 
-        public Fraction Add(Fraction b)
+        public static bool operator ==(Fraction a, Fraction b)
         {
-            var a = this;
-
-            var numer = a.Numerator * b.Denominator + a.Denominator * b.Numerator;
-            var denom = a.Denominator * b.Denominator;
-
-            return new Fraction(numer, denom);
+            return Equals(a, b);
         }
 
-        public Fraction Negate()
+        public static bool operator !=(Fraction a, Fraction b)
         {
-            var a = this;
+            return !Equals(a, b);
+        }
 
+        public static Fraction operator +(Fraction a, Fraction b)
+        {
+            return new Fraction(a.Numerator * b.Denominator + a.Denominator * b.Numerator, a.Denominator * b.Denominator);
+        }
+
+        public static Fraction operator -(Fraction a)
+        {
             return new Fraction(-a.Numerator, a.Denominator);
         }
 
-        public Fraction Subtract(Fraction b)
+        public static Fraction operator -(Fraction a, Fraction b)
         {
-            var a = this;
-
-            return a.Add(b.Negate());
+            return new Fraction(a.Numerator * b.Denominator - a.Denominator * b.Numerator, a.Denominator * b.Denominator);
         }
 
-        public Fraction Multiply(Fraction b)
+        public static Fraction operator *(Fraction a, Fraction b)
         {
-            var a = this;
-            var numer = a.Numerator * b.Numerator;
-            var denom = a.Denominator * b.Denominator;
-
-            return new Fraction(numer, denom);
+            return new Fraction(a.Numerator * b.Numerator, a.Denominator * b.Denominator);
         }
 
-        public Fraction Divide(Fraction b)
+        public static Fraction operator /(Fraction a, Fraction b)
         {
-            var a = this;
-
-            return a.Multiply(b.Invert());
+            return new Fraction(a.Numerator / b.Numerator, a.Denominator / b.Denominator);
         }
     }
 }
